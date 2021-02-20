@@ -1,0 +1,66 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>OTP-Verification</title>
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-5/css/fontawesome-all.min.css' %}">
+	<!-- Main Style Css -->
+    <link rel="stylesheet" href="{% static 'css/styleLog.css' %}"/>
+	<link rel="stylesheet" href="{% static 'css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/formstyle.css' %}">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> 
+    </script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"> 
+    </script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"> 
+    </script> 
+    <style> 
+        .navbar-nav { 
+            margin-left: auto; 
+        } 
+    </style>
+</head>
+<body>
+	<section class="banner-area" id="home">
+				<!-- Start Header Area -->
+				<header class="default-header">
+					<!-- <nav class="navbar navbar-expand-lg  navbar-light"> -->
+						<!-- <div class="container" style="margin: 10px 0px 0px 120px">
+							  <a class="navbar-brand" href="/">
+							  	<img src="{% static 'img/PicsArt_white.png' %}" alt="">
+							  </a>						
+						</div> -->
+						<nav class="navbar navbar-expand-sm bg-dark"> 		  	
+				        	<ul class="navbar-nav" style="margin-right: 5%;">
+				            <li class="nav-item" style="padding-right: 10px"><a class="nav-link" href="/">Home</a></li> 
+				        </ul> 
+					</nav>
+				</header>
+				<!-- End Header Area -->				
+			</section>
+	<div class="page-content" style="background-color: #696969">
+		<div class="form-v5-content">
+		{% block content %}
+			<form class="form-detail" method = "post" autocomplete="off" enctype="multipart/form-data">
+				<h2>OTP-Verification</h2>
+				{% csrf_token %}
+                {{ form|crispy  }}
+                {% if minutes > 30.00 %}
+                <a href="/resend_otp/{{ userid }}" style="color: red">Your OTP Expired</a>
+                {% else %}
+                <a href="/resend_otp/{{ userid }}" style="color: red">Resend-OTP</a><br>
+                {% endif %}
+				<div class="form-row-last">
+					<input type="submit" name="register" class="registers" value="Verify">
+				</div>
+			</form>
+			{% endblock %}
+		</div>
+	</div>
+</body>
+</html>
