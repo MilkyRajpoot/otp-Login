@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Admin Panel{% endblock %}</title>
+</head>
+<body>
+  <header>
+    <br>
+    <br>
+   <h2 style="text-align:center"><b>Dashboard</b></h2>
+    {% if user.is_authenticated %}
+    <a href="{% url 'home' %}"><h2 style="text-align:center"><b>Home</b></h2></a>
+      <h3 style="text-align:right;">Hi {{ user.username }}! <a href="{% url 'logout' %}">Logout</a>
+      </h3>
+     
+    {% else %}
+  
+    {% endif %}
+  </header>
+  <hr>
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+  
+  <footer>
+    <hr>
+  </footer>
+</body>
+</html>
